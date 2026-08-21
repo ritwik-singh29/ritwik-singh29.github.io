@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ritwik Singh — Computational Biology</title>
+<meta name="description" content="Ritwik Singh, computational biologist working on transcriptomic and epigenomic network analysis in Plasmodium falciparum, moving toward AI analysis of diagnostic imaging for targeted therapeutics.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;0,6..96,700;1,6..96,400;1,6..96,600&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   PALETTE AND TYPE
+   To restyle the whole page, edit only this block.
+   ============================================================ */
+:root{
+  --paper:#E9E9EA;
+  --panel:#E2DDD5;
+  --white:#F4F4F4;
+  --ink:#161616;
+  --body:#46464A;
+  --muted:#75757A;
+  --rule:#C7C7C9;
+  --blue:#7BA7DC;
+  --blue-ink:#4E7FB8;
+  --band:#8FB4E0;
+
+  --display:"Bodoni Moda",Didot,Georgia,serif;
+  --sans:"Archivo",system-ui,-apple-system,sans-serif;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 40px;}
+
+/* ============================================================
+   STICKY HEADER
+   Name and nav both pin. Header shrinks once you scroll.
+   ============================================================ */
+.site{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(233,233,234,0.95);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--rule);
+}
+.masthead{
+  text-align:center;
+  padding:40px 0 20px;
+  transition:padding .3s ease;
+}
+.home{text-decoration:none;color:inherit;display:inline-block;}
+.wordmark{
+  font-family:var(--display);
+  font-size:46px;
+  font-weight:600;
+  letter-spacing:-0.005em;
+  line-height:1;
+  margin:0;
+  transition:font-size .3s ease, color .25s ease;
+}
+.home:hover .wordmark{color:var(--blue-ink);}
+.tagline{
+  font-size:12px;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin:15px 0 0;
+  max-height:40px;
+  overflow:hidden;
+  transition:max-height .3s ease, opacity .25s ease, margin .3s ease;
+}
+
+/* compact state, added by script on scroll */
+.site.compact .masthead{padding:12px 0 8px;}
+.site.compact .wordmark{font-size:24px;}
+.site.compact .tagline{max-height:0;opacity:0;margin-top:0;}
+
+.navlinks{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:28px;
+  padding:0 40px 15px;
+  margin:0;
+  list-style:none;
+}
+.navlinks a{
+  text-decoration:none;
+  font-size:11.5px;
+  letter-spacing:0.17em;
+  text-transform:uppercase;
+  color:var(--body);
+  padding:3px 0;
+  border-bottom:1px solid transparent;
+  transition:color .2s ease, border-color .2s ease;
+}
+.navlinks a:hover{color:var(--ink);}
+.navlinks a.on{color:var(--blue-ink);border-bottom-color:var(--blue-ink);}
+
+/* ---------- hero ---------- */
+.hero{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:64px;
+  align-items:center;
+  padding:76px 0 88px;
+}
+.hero h2{
+  font-family:var(--display);
+  font-size:58px;
+  font-weight:600;
+  line-height:1.04;
+  letter-spacing:-0.015em;
+  margin:0 0 14px;
+}
+.hero h2 em{font-style:italic;font-weight:400;}
+.hero .where{
+  font-size:14px;
+  letter-spacing:0.05em;
+  color:var(--muted);
+  margin:0 0 34px;
+}
+
+/* action buttons */
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin:0;}
+.pill{
+  display:inline-block;
+  font-size:11.5px;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  text-decoration:none;
+  color:var(--blue-ink);
+  background:transparent;
+  border:1px solid var(--blue);
+  border-radius:999px;
+  padding:14px 30px;
+  transition:background .22s ease, color .22s ease, border-color .22s ease;
+  white-space:nowrap;
+}
+.pill:hover{background:var(--blue-ink);border-color:var(--blue-ink);color:var(--white);}
+.pill.filled{background:var(--blue-ink);border-color:var(--blue-ink);color:var(--white);}
+.pill.filled:hover{background:transparent;color:var(--blue-ink);border-color:var(--blue);}
+
+/* ============================================================
+   PORTRAIT
+   To show your photo: upload photo.jpg to the repo root, then
+   delete the two comment markers around the <img> tag in the
+   hero below. Nothing else needs changing.
+   ============================================================ */
+.portrait{
+  display:block;
+  width:100%;
+  aspect-ratio:4 / 5;
+  object-fit:cover;
+  margin:0 0 26px;
+}
+
+.statement{
+  background:var(--panel);
+  padding:46px 42px;
+}
+.statement p{
+  font-family:var(--display);
+  font-size:20px;
+  line-height:1.55;
+  margin:0 0 18px;
+  color:var(--ink);
+  text-align:justify;
+  hyphens:auto;
+}
+.statement p:last-child{margin-bottom:0;font-size:17px;color:var(--body);}
+.statement em{font-style:italic;}
+
+/* ---------- blue band ---------- */
+.band{height:56px;background:var(--band);}
+.band.thin{height:32px;}
+
+/* ---------- sections ---------- */
+section{padding:76px 0;scroll-margin-top:118px;}
+.sectionhead{
+  font-family:var(--display);
+  font-size:34px;
+  font-weight:600;
+  letter-spacing:-0.01em;
+  line-height:1.15;
+  margin:0 0 34px;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--rule);
+}
+
+.entry{margin-bottom:46px;}
+.entry:last-child{margin-bottom:0;}
+.entry h3{
+  font-family:var(--display);
+  font-size:26px;
+  font-weight:600;
+  line-height:1.28;
+  letter-spacing:-0.008em;
+  margin:0 0 8px;
+}
+.entry h3 em{font-style:italic;font-weight:400;}
+.meta{
+  font-size:14px;
+  color:var(--body);
+  letter-spacing:0.02em;
+  margin:0 0 6px;
+}
+.sup{
+  font-size:14.5px;
+  color:var(--body);
+  font-style:italic;
+  margin:0 0 14px;
+}
+.entry ul{margin:14px 0 0;padding-left:19px;}
+.entry li{
+  margin-bottom:9px;
+  color:var(--body);
+  font-size:15.5px;
+  text-align:justify;
+  hyphens:auto;
+}
+.entry li::marker{color:var(--blue);}
+.entry p.body{
+  margin:12px 0 0;
+  color:var(--body);
+  font-size:15.5px;
+  text-align:justify;
+  hyphens:auto;
+}
+
+.lnk{
+  text-decoration:none;
+  color:inherit;
+  border-bottom:1px solid var(--blue);
+  transition:color .2s ease, border-color .2s ease;
+}
+.lnk:hover{color:var(--blue-ink);border-bottom-color:var(--blue-ink);}
+
+/* publication */
+.cite{
+  background:var(--panel);
+  padding:38px 40px;
+  font-family:var(--display);
+  font-size:21px;
+  line-height:1.55;
+  margin:0;
+  text-align:justify;
+  hyphens:auto;
+}
+.cite .status{
+  display:block;
+  font-family:var(--sans);
+  font-size:13.5px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-top:16px;
+  text-align:left;
+}
+
+/* skills grid */
+.grid3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:34px 30px;
+}
+.card{border-top:2px solid var(--ink);padding-top:16px;}
+.card h4{
+  font-family:var(--display);
+  font-size:20px;
+  font-weight:600;
+  margin:0 0 8px;
+  line-height:1.25;
+}
+.card p{
+  margin:0;
+  color:var(--body);
+  font-size:15px;
+  line-height:1.65;
+  text-align:justify;
+  hyphens:auto;
+}
+
+/* hairline list */
+.plain{margin:0;padding:0;list-style:none;}
+.plain li{
+  padding:14px 0;
+  border-bottom:1px solid var(--rule);
+  color:var(--body);
+  font-size:15.5px;
+  text-align:justify;
+  hyphens:auto;
+}
+.plain li:first-child{border-top:1px solid var(--rule);}
+.plain li strong{color:var(--ink);font-weight:600;}
+.plain li .note{display:block;font-size:14px;color:var(--muted);margin-top:2px;}
+
+/* ============================================================
+   INTERESTS MARQUEE
+   Speed is set by the animation duration on .track (60s).
+   Larger number = slower.
+   ============================================================ */
+.marquee{
+  overflow:hidden;
+  padding:6px 0;
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 9%,#000 91%,transparent);
+  mask-image:linear-gradient(to right,transparent,#000 9%,#000 91%,transparent);
+}
+.track{
+  display:flex;
+  width:max-content;
+  animation:glide 60s linear infinite;
+}
+.marquee:hover .track{animation-play-state:paused;}
+.track .item{
+  font-family:var(--display);
+  font-size:26px;
+  font-weight:400;
+  color:var(--ink);
+  white-space:nowrap;
+  padding:0 4px;
+}
+.track .sep{
+  color:var(--blue);
+  font-size:20px;
+  padding:0 26px;
+  align-self:center;
+}
+@keyframes glide{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+.marquee-note{
+  font-size:12px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin:18px 0 0;
+  text-align:center;
+}
+
+/* ---------- footer ---------- */
+footer{
+  border-top:1px solid var(--rule);
+  padding:60px 0 70px;
+}
+.footgrid{
+  display:grid;
+  grid-template-columns:1.6fr 1fr;
+  gap:56px;
+}
+.footgrid h5{
+  font-family:var(--display);
+  font-size:26px;
+  font-weight:600;
+  margin:0 0 12px;
+}
+.footgrid p{
+  margin:0 0 24px;
+  color:var(--body);
+  font-size:15px;
+  text-align:justify;
+  hyphens:auto;
+  max-width:46ch;
+}
+.social{display:flex;gap:12px;}
+.social a{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:46px;
+  height:46px;
+  border:1px solid var(--blue);
+  border-radius:999px;
+  color:var(--blue-ink);
+  text-decoration:none;
+  transition:background .22s ease, color .22s ease, border-color .22s ease;
+}
+.social a:hover{background:var(--blue-ink);border-color:var(--blue-ink);color:var(--white);}
+.social svg{width:19px;height:19px;fill:currentColor;display:block;}
+
+.footcol span{
+  display:block;
+  font-size:11.5px;
+  letter-spacing:0.17em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:14px;
+}
+.footcol a{
+  display:block;
+  text-decoration:none;
+  color:var(--body);
+  font-size:15px;
+  padding:5px 0;
+  width:fit-content;
+  transition:color .2s ease;
+}
+.footcol a:hover{color:var(--blue-ink);}
+.colophon{
+  margin-top:46px;
+  padding-top:20px;
+  border-top:1px solid var(--rule);
+  font-size:12px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* ---------- entrance ---------- */
+.fade{opacity:0;transform:translateY(12px);animation:rise .8s cubic-bezier(.2,.7,.3,1) forwards;}
+@keyframes rise{to{opacity:1;transform:none;}}
+.d1{animation-delay:.05s;}
+.d2{animation-delay:.16s;}
+
+/* ---------- responsive ---------- */
+@media(max-width:900px){
+  .wrap{padding:0 22px;}
+  .masthead{padding:22px 0 12px;}
+  .wordmark{font-size:30px;}
+  .tagline{font-size:10.5px;letter-spacing:0.15em;margin-top:10px;}
+  .site.compact .wordmark{font-size:20px;}
+  .navlinks{gap:16px;padding:0 22px 12px;}
+  section{padding:54px 0;scroll-margin-top:104px;}
+  .hero{grid-template-columns:1fr;gap:40px;padding:48px 0 60px;}
+  .hero h2{font-size:38px;}
+  .statement{padding:32px 26px;}
+  .sectionhead{font-size:28px;}
+  .entry h3{font-size:22px;}
+  .grid3{grid-template-columns:1fr;gap:26px;}
+  .cite{padding:28px 26px;font-size:18px;}
+  .footgrid{grid-template-columns:1fr;gap:36px;}
+  .track .item{font-size:20px;}
+  .track .sep{padding:0 16px;}
+  .pill{padding:13px 24px;}
+}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  .fade{animation:none;opacity:1;transform:none;}
+  .track{animation:none;flex-wrap:wrap;width:auto;justify-content:center;}
+  .marquee{-webkit-mask-image:none;mask-image:none;}
+  *{transition:none !important;}
+}
+
+/* ---------- print ---------- */
+@media print{
+  body{background:#fff;font-size:10.5pt;}
+  .site{position:static;}
+  .navlinks,.actions,.band,.social,footer{display:none;}
+  section{padding:14pt 0;page-break-inside:avoid;}
+  .statement,.cite{background:none;padding:0;border-left:2px solid #999;padding-left:14pt;}
+  .track{animation:none;flex-wrap:wrap;width:auto;}
+  .marquee{-webkit-mask-image:none;mask-image:none;}
+  a{text-decoration:none;}
+  .lnk{border-bottom:none;}
+}
+
+:focus-visible{outline:2px solid var(--blue-ink);outline-offset:3px;}
+</style>
+</head>
+
+<body id="top">
+
+<header class="site" id="siteHeader">
+  <div class="wrap masthead">
+    <a class="home" href="#top" aria-label="Back to top">
+      <h1 class="wordmark">Ritwik Singh</h1>
+    </a>
+    <p class="tagline">Computational Biology &nbsp;·&nbsp; Epigenomics &nbsp;·&nbsp; Network Analysis</p>
+  </div>
+  <nav aria-label="Sections">
+    <ul class="navlinks">
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#teaching">Teaching</a></li>
+      <li><a href="#recognition">Recognition</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="fade d1">
+      <h2>Networks, methylation, and <em>P. falciparum</em></h2>
+      <p class="where">New Delhi, India</p>
+      <div class="actions">
+        <a class="pill filled" href="Ritwik_Singh_CV.pdf">CV</a>
+        <a class="pill" href="tel:+917905085337">Reach Out</a>
+      </div>
+    </div>
+
+    <div class="fade d2">
+
+      <!-- PHOTO: upload photo.jpg to the repo root, then delete this
+           line and the matching line below to switch the image on.
+      <img class="portrait" src="photo.jpg" alt="Portrait of Ritwik Singh">
+           end of photo block -->
+
+      <div class="statement">
+        <p>Computational biologist working on transcriptomic and epigenomic network analysis in clinical <em>Plasmodium falciparum</em> isolates, building separate sense and antisense co-expression networks, mapping differentially methylated regions across disease manifestations, and correlating methylation state against expression to nominate intervention points.</p>
+        <p>My longer-term aim is to combine diagnostic scanning imagery with AI-driven analysis, linking quantitative imaging signatures to molecular phenotypes to guide targeted therapeutic strategies.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="band"></div>
+
+<div class="wrap">
+
+  <section id="research">
+    <h2 class="sectionhead">Notable academic work</h2>
+
+    <div class="entry">
+      <h3>Correlation of Gene Expression with Epigenetic Modifications in <em>P. falciparum</em></h3>
+      <p class="meta">On-campus Thesis &nbsp;·&nbsp; BITS Pilani &nbsp;·&nbsp; Jan 2025 – May 2025</p>
+      <p class="sup">Supervised by Senior Professor <a class="lnk" href="https://www.bits-pilani.ac.in/pilani/ashis-kumar-das/" target="_blank" rel="noopener">Ashis Kumar Das</a>, Department of Biological Sciences</p>
+      <ul>
+        <li>Characterised DNA methylation profiles across clinical replicates and summarised methylation patterns by sample.</li>
+        <li>Identified and annotated DMRs stratified by disease manifestation.</li>
+        <li>Quantified the correlation between methylation state and gene expression at a genome level.</li>
+        <li>Assembled a hub-gene list from the integrated analysis and proposed candidate intervention points for next-generation antimalarial strategies.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <h3>Transcriptomic and Epigenetic Network Analysis in <em>Plasmodium falciparum</em></h3>
+      <p class="meta">Special Project &amp; Lab-Oriented Projects &nbsp;·&nbsp; BITS Pilani &nbsp;·&nbsp; May 2023 – May 2024</p>
+      <p class="sup">Supervised by Senior Professor <a class="lnk" href="https://www.bits-pilani.ac.in/pilani/ashis-kumar-das/" target="_blank" rel="noopener">Ashis Kumar Das</a>, Department of Biological Sciences</p>
+      <ul>
+        <li>Constructed weighted gene co-expression networks (WGCNA) from microarray expression data of clinical <em>P. falciparum</em> isolates, generating independent sense and antisense networks. This approach surfaces regulatory structure that conventional sense-only analysis misses.</li>
+        <li>Identified candidate hub genes from network topology across clinical samples spanning multiple disease manifestations.</li>
+        <li>Extended the framework to DNA methylation, mapping differentially methylated regions by manifestation and correlating methylation against expression to propose intervention points for next-generation antimalarials.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="publications">
+    <h2 class="sectionhead">Publications</h2>
+    <p class="cite">
+      Singh, R. &ldquo;Gene co-expression network analysis of sense and antisense transcriptomes from <em>Plasmodium falciparum</em> clinical isolates.&rdquo;
+      <span class="status">Manuscript in preparation &nbsp;·&nbsp; expected December 2026</span>
+    </p>
+  </section>
+
+  <section id="skills">
+    <h2 class="sectionhead">Technical skills</h2>
+    <div class="grid3">
+      <div class="card">
+        <h4>Sequencing &amp; QC</h4>
+        <p>FastQC, MultiQC, read trimming, BEDtools</p>
+      </div>
+      <div class="card">
+        <h4>Transcriptomics</h4>
+        <p>Microarray preprocessing and normalisation, differential expression, sense–antisense transcript quantification, Intra-Array Clustering (IAC)</p>
+      </div>
+      <div class="card">
+        <h4>Network Biology</h4>
+        <p>WGCNA, module–trait correlation, hub-gene identification, network topology analysis, Cytoscape</p>
+      </div>
+      <div class="card">
+        <h4>Functional Analysis</h4>
+        <p>PlasmoDB, NCBI / GEO data retrieval</p>
+      </div>
+      <div class="card">
+        <h4>Programming</h4>
+        <p>R (tidyverse, Bioconductor), Python (pandas, NumPy, scikit-learn), Bash, Go</p>
+      </div>
+      <div class="card">
+        <h4>Engineering &amp; Web</h4>
+        <p>Signal processing and instrumentation, ReactJS, Git, GitHub, A/B testing and experiment design</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="band thin"></div>
+
+<div class="wrap">
+
+  <section id="education">
+    <h2 class="sectionhead">Education</h2>
+
+    <div class="entry">
+      <h3>BITS Pilani</h3>
+      <p class="meta">M.Sc. Biological Sciences &nbsp;|&nbsp; B.E. Electronics and Instrumentation (Integrated Dual Degree) &nbsp;·&nbsp; July 2025</p>
+      <ul>
+        <li>CGPA 8.74 / 10</li>
+        <li><strong>Master&rsquo;s Thesis:</strong> &ldquo;Correlation of Gene Expression with Epigenetic Modifications in <em>Plasmodium falciparum</em>&rdquo;, supervised by Senior Professor <a class="lnk" href="https://www.bits-pilani.ac.in/pilani/ashis-kumar-das/" target="_blank" rel="noopener">Ashis Kumar Das</a>, Department of Biological Sciences.</li>
+        <li><strong>Design Project:</strong> Feasibility Analysis of Rotatable Solar Panels, which demonstrated a ~20% average rise in energy production using real-time field data from Rajasthan, overseen by Professor <a class="lnk" href="https://www.bits-pilani.ac.in/pilani/hitesh-datt-mathur/" target="_blank" rel="noopener">Hitesh Datt Mathur</a>, Department of Electrical and Electronics Engineering.</li>
+        <li><strong>MCN Scholarship</strong>, a renewable semester-wise grant for demonstrated academic excellence.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <h3>Sunbeam English School, Varanasi</h3>
+      <p class="meta">CBSE Senior Secondary Examination &nbsp;·&nbsp; May 2020</p>
+      <ul>
+        <li>97.2% aggregate, Mathematics 100/100</li>
+        <li>Ranked in the top 0.1% of test takers nationally</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2 class="sectionhead">Engineering &amp; industry experience</h2>
+
+    <div class="entry">
+      <h3>Uber</h3>
+      <p class="meta">Software Engineering Intern &nbsp;·&nbsp; Hyderabad, Telangana &nbsp;·&nbsp; July 2024 – Dec 2024</p>
+      <ul>
+        <li>Worked within the Payments Compliance team on global regulatory requirements while minimising user-facing friction.</li>
+        <li>Optimised the Level-1 KYC onboarding flow for Uber Money users across the UK and EU.</li>
+        <li>Designed and ran A/B tests prior to full-scale launch and quantified the impact on onboarding completion.</li>
+        <li>Built the flow for straightforward extension to additional geographies including Mexico, New Zealand, and Japan.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <h3>Reliance Jio Platforms</h3>
+      <p class="meta">Web Development Intern &nbsp;·&nbsp; Mumbai, Maharashtra &nbsp;·&nbsp; May 2022 – July 2022</p>
+      <p class="body">Built a ReactJS front-end for a data visualisation service rendering user-uploaded CSV data across stacked area, percent area, bar, pie, radar, box, candlestick, and bean plots.</p>
+    </div>
+  </section>
+
+  <section id="teaching">
+    <h2 class="sectionhead">Teaching &amp; outreach</h2>
+
+    <div class="entry">
+      <h3>Teaching Assistant</h3>
+      <p class="meta">Microprocessors and Interfacing &nbsp;·&nbsp; BITS Pilani &nbsp;·&nbsp; Jan 2024 – May 2024</p>
+    </div>
+
+    <div class="entry">
+      <h3><a class="lnk" href="https://pragatipublicschool.co.in/" target="_blank" rel="noopener">Pragati Public School, Varanasi</a></h3>
+      <p class="meta">IT Consultant &nbsp;·&nbsp; Nov 2020 – April 2023</p>
+      <p class="body">Built a Moodle-based LMS to sustain online teaching through the COVID-19 pandemic and its aftermath; redesigned the school website and managed its social media presence; prepared and filed the school&rsquo;s ATL tranche application, securing fund release from NITI Aayog under the Atal Innovation Mission.</p>
+    </div>
+
+    <div class="entry">
+      <h3><a class="lnk" href="https://hindipressclub.wordpress.com/" target="_blank" rel="noopener">Hindi Press Club, BITS Pilani</a></h3>
+      <p class="meta">BOSM Coordinator &nbsp;·&nbsp; Aug 2023 – Dec 2023</p>
+      <p class="body">Organised open-mic commentary for basketball and cricket fixtures; oversaw drafting and publication of 200 Hindi newsletters daily across the four-day annual sports festival.</p>
+    </div>
+  </section>
+
+  <section id="recognition">
+    <h2 class="sectionhead">Awards, scholarships &amp; certifications</h2>
+    <ul class="plain">
+      <li><strong>Apoorv Foundation Scholarship</strong> and <strong>V. Ramakrishna Award</strong>
+        <span class="note">Awarded to the school&rsquo;s top-ranked science student and to the school&rsquo;s best Class 12 CBSE performer respectively.</span></li>
+      <li><strong>SAT India Top Performer</strong><span class="note">2020</span></li>
+      <li><strong>Rank 158, SOF International Mathematics Olympiad</strong></li>
+      <li><strong>Winner, Annual COFAS International</strong><span class="note">City Montessori School, 2016</span></li>
+      <li><strong>Introduction to Intellectual Property</strong><span class="note">University of Pennsylvania (Coursera), Oct 2025</span></li>
+    </ul>
+  </section>
+</div>
+
+<section id="interests" style="padding-bottom:40px;">
+  <div class="wrap">
+    <h2 class="sectionhead">Interests</h2>
+  </div>
+  <div class="marquee">
+    <div class="track">
+      <!-- set one -->
+      <span class="item">AI applications in non-conventional domains</span><span class="sep">◆</span>
+      <span class="item">Writing on technology in public systems</span><span class="sep">◆</span>
+      <span class="item">Schooling and pedagogy</span><span class="sep">◆</span>
+      <span class="item">Natural and historical documentaries</span><span class="sep">◆</span>
+      <span class="item">Trekking and wildlife exploration</span><span class="sep">◆</span>
+      <span class="item">Cricket, as an off-spin bowler and middle-order batsman</span><span class="sep">◆</span>
+      <!-- set two, identical, so the loop is seamless -->
+      <span class="item" aria-hidden="true">AI applications in non-conventional domains</span><span class="sep" aria-hidden="true">◆</span>
+      <span class="item" aria-hidden="true">Writing on technology in public systems</span><span class="sep" aria-hidden="true">◆</span>
+      <span class="item" aria-hidden="true">Schooling and pedagogy</span><span class="sep" aria-hidden="true">◆</span>
+      <span class="item" aria-hidden="true">Natural and historical documentaries</span><span class="sep" aria-hidden="true">◆</span>
+      <span class="item" aria-hidden="true">Trekking and wildlife exploration</span><span class="sep" aria-hidden="true">◆</span>
+      <span class="item" aria-hidden="true">Cricket, as an off-spin bowler and middle-order batsman</span><span class="sep" aria-hidden="true">◆</span>
+    </div>
+  </div>
+  <div class="wrap"><p class="marquee-note">Hover to pause</p></div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footgrid">
+      <div>
+        <h5>Get in touch</h5>
+        <p>Open to research collaborations and graduate positions in computational biology and biomedical imaging.</p>
+        <div class="social">
+          <a href="https://linkedin.com/in/YOUR-HANDLE" target="_blank" rel="noopener" aria-label="LinkedIn profile" title="LinkedIn">
+            <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="https://medium.com/@ritwiksingh.37" target="_blank" rel="noopener" aria-label="Medium profile" title="Medium">
+            <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footcol">
+        <span>Contact</span>
+        <a href="mailto:s29.ritwik@gmail.com">s29.ritwik@gmail.com</a>
+        <a href="tel:+917905085337">+91 7905085337</a>
+        <a href="Ritwik_Singh_CV.pdf">Download CV</a>
+        <a href="#top">Back to top</a>
+      </div>
+    </div>
+    <p class="colophon">Ritwik Singh &nbsp;·&nbsp; Last updated August 2026</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* shrink the header once you scroll past the hero top */
+  var header = document.getElementById('siteHeader');
+  var links = Array.prototype.slice.call(document.querySelectorAll('.navlinks a'));
+  var sections = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+
+  function update(){
+    var y = window.scrollY;
+    header.classList.toggle('compact', y > 60);
+
+    var mark = y + window.innerHeight * 0.28;
+    var current = -1;
+    sections.forEach(function(s,i){
+      if(s && s.getBoundingClientRect().top + y <= mark) current = i;
+    });
+    links.forEach(function(a,i){
+      a.classList.toggle('on', i === current);
+    });
+  }
+
+  var ticking = false;
+  window.addEventListener('scroll', function(){
+    if(!ticking){
+      window.requestAnimationFrame(function(){ update(); ticking = false; });
+      ticking = true;
+    }
+  }, {passive:true});
+
+  update();
+})();
+</script>
+</body>
+</html>
