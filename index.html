@@ -208,14 +208,28 @@ a{color:inherit;}
 section{padding:76px 0;scroll-margin-top:118px;}
 .sectionhead{
   font-family:var(--display);
-  font-size:34px;
-  font-weight:600;
-  letter-spacing:-0.01em;
-  line-height:1.15;
-  margin:0 0 34px;
-  padding-bottom:18px;
-  border-bottom:1px solid var(--rule);
+  font-size:42px;
+  font-weight:700;
+  letter-spacing:-0.015em;
+  line-height:1.1;
+  color:#2F5D8C;
+  margin:0 0 38px;
+  padding-bottom:20px;
+  border-bottom:2px solid #000000;
 }
+
+section.tinted{
+  background:var(--panel);
+  clip-path:inset(0 -100vmax);
+  box-shadow:0 0 0 100vmax var(--panel);
+}
+
+section.tint{
+  background:var(--rule);
+  clip-path:inset(0 -100vmax);
+  box-shadow:0 0 0 100vmax var(--rule);
+}
+
 
 .entry{margin-bottom:46px;}
 .entry:last-child{margin-bottom:0;}
@@ -293,7 +307,7 @@ section{padding:76px 0;scroll-margin-top:118px;}
   grid-template-columns:repeat(3,1fr);
   gap:34px 30px;
 }
-.card{border-top:2px solid var(--ink);padding-top:16px;}
+.card{border-top:0px solid var(--ink);padding-top:16px;}
 .card h4{
   font-family:var(--display);
   font-size:20px;
@@ -516,7 +530,7 @@ footer{
     </ul>
   </nav>
 </header>
-
+<div class="band thin"></div>
 <div class="wrap">
   <div class="hero">
     <div class="fade d1">
@@ -535,8 +549,6 @@ footer{
     </div>
   </div>
 </div>
-
-<div class="band"></div>
 
 <div class="wrap">
 
@@ -575,7 +587,7 @@ footer{
     </p>
   </section>
 
-  <section id="skills">
+  <section id="skills" class="tint">
     <h2 class="sectionhead">Technical skills</h2>
     <div class="grid3">
       <div class="card">
@@ -655,7 +667,7 @@ footer{
     </div>
   </section>
 
-  <section id="teaching">
+  <section id="teaching" class="tinted">
     <h2 class="sectionhead">Teaching &amp; outreach</h2>
 
     <div class="entry">
@@ -689,7 +701,7 @@ footer{
   </section>
 </div>
 
-<section id="interests" style="padding-bottom:40px;">
+<section id="interests" style="padding-bottom:40px;" class="tinted">
   <div class="wrap">
     <h2 class="sectionhead">Interests</h2>
   </div>
