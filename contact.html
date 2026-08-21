@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reach Out — Ritwik Singh</title>
+<meta name="description" content="Get in touch with Ritwik Singh about research collaborations, graduate positions, and computational biology work.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;0,6..96,700;1,6..96,400;1,6..96,600&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --paper:#E9E9EA;
+  --panel:#E2DDD5;
+  --white:#F4F4F4;
+  --ink:#161616;
+  --body:#46464A;
+  --muted:#75757A;
+  --rule:#C7C7C9;
+  --blue:#7BA7DC;
+  --blue-ink:#4E7FB8;
+  --deep:#2F5D8C;
+  --band:#8FB4E0;
+
+  --display:"Bodoni Moda",Didot,Georgia,serif;
+  --sans:"Archivo",system-ui,-apple-system,sans-serif;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;}
+
+.shell{
+  max-width:1240px;
+  margin:0 auto;
+  padding:0 40px;
+  display:grid;
+  grid-template-columns:1fr 3fr;
+  gap:60px;
+  align-items:start;
+}
+
+/* ============================================================
+   LEFT RAIL, one quarter
+   ============================================================ */
+.rail{
+  position:sticky;
+  top:0;
+  padding:56px 0 40px;
+  text-align:center;
+}
+.avatar{
+  width:132px;
+  height:132px;
+  margin:0 auto 22px;
+  border-radius:50%;
+  background-image:url("photo.jpg");
+  background-size:cover;
+  background-position:center 22%;
+  background-repeat:no-repeat;
+  border:1px solid var(--rule);
+  pointer-events:none;
+  user-select:none;
+  -webkit-user-drag:none;
+}
+.rail h1{
+  font-family:var(--display);
+  font-size:32px;
+  font-weight:600;
+  line-height:1.1;
+  letter-spacing:-0.01em;
+  margin:0 0 12px;
+}
+.rail h1 a{text-decoration:none;transition:color .2s ease;}
+.rail h1 a:hover{color:var(--blue-ink);}
+.rail .role{
+  font-size:11px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin:0 0 28px;
+  line-height:2;
+}
+
+.pill{
+  display:inline-block;
+  font-size:11.5px;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  text-decoration:none;
+  color:var(--white);
+  background:var(--blue-ink);
+  border:1px solid var(--blue-ink);
+  border-radius:999px;
+  padding:14px 34px;
+  transition:background .22s ease, color .22s ease, border-color .22s ease;
+}
+.pill:hover{background:transparent;color:var(--blue-ink);border-color:var(--blue);}
+
+.social{display:flex;justify-content:center;gap:12px;margin:24px 0 0;}
+.social a{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:44px;
+  height:44px;
+  border:1px solid var(--blue);
+  border-radius:999px;
+  color:var(--blue-ink);
+  text-decoration:none;
+  transition:background .22s ease, color .22s ease, border-color .22s ease;
+}
+.social a:hover{background:var(--blue-ink);border-color:var(--blue-ink);color:var(--white);}
+.social svg{width:18px;height:18px;fill:currentColor;display:block;}
+
+.backlink{
+  display:inline-block;
+  margin-top:30px;
+  font-size:12px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+  text-decoration:none;
+  border-bottom:1px solid var(--rule);
+  padding-bottom:2px;
+  transition:color .2s ease, border-color .2s ease;
+}
+.backlink:hover{color:var(--blue-ink);border-bottom-color:var(--blue-ink);}
+
+/* ============================================================
+   RIGHT COLUMN, three quarters
+   ============================================================ */
+.main{padding:56px 0 90px;}
+.pagehead{
+  font-family:var(--display);
+  font-size:52px;
+  font-weight:700;
+  letter-spacing:-0.015em;
+  line-height:1.05;
+  color:var(--deep);
+  margin:0 0 16px;
+  padding-bottom:22px;
+  border-bottom:2px solid var(--deep);
+}
+.intro{
+  font-family:var(--display);
+  font-size:19px;
+  line-height:1.6;
+  color:var(--body);
+  margin:0 0 46px;
+  max-width:60ch;
+}
+
+.field{margin-bottom:34px;}
+.field label{
+  display:block;
+  font-size:11.5px;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--ink);
+  font-weight:600;
+  margin-bottom:10px;
+}
+.field .hint{
+  display:block;
+  font-size:13.5px;
+  letter-spacing:0;
+  text-transform:none;
+  color:var(--muted);
+  font-weight:400;
+  margin-top:3px;
+}
+.field input[type=text],
+.field input[type=email],
+.field textarea{
+  width:100%;
+  font-family:var(--sans);
+  font-size:16.5px;
+  color:var(--ink);
+  background:transparent;
+  border:none;
+  border-bottom:1px solid var(--rule);
+  padding:12px 2px;
+  transition:border-color .2s ease;
+}
+.field textarea{
+  min-height:150px;
+  resize:vertical;
+  line-height:1.65;
+}
+.field input:focus,
+.field textarea:focus{
+  outline:none;
+  border-bottom-color:var(--deep);
+  border-bottom-width:2px;
+  padding-bottom:11px;
+}
+.field input::placeholder,
+.field textarea::placeholder{color:#A3A3A6;}
+
+/* file input */
+.filebox{
+  border:1px dashed var(--rule);
+  padding:26px 24px;
+  text-align:center;
+  transition:border-color .2s ease, background .2s ease;
+}
+.filebox:hover{border-color:var(--blue);background:rgba(123,167,220,0.06);}
+.filebox input[type=file]{
+  position:absolute;
+  width:1px;height:1px;
+  opacity:0;
+  overflow:hidden;
+}
+.filebtn{
+  display:inline-block;
+  font-size:11.5px;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--blue-ink);
+  border:1px solid var(--blue);
+  border-radius:999px;
+  padding:11px 26px;
+  cursor:pointer;
+  transition:background .22s ease, color .22s ease;
+}
+.filebtn:hover{background:var(--blue-ink);color:var(--white);border-color:var(--blue-ink);}
+.filename{
+  display:block;
+  margin-top:14px;
+  font-size:14px;
+  color:var(--body);
+}
+.filename.empty{color:var(--muted);}
+
+/* honeypot, hidden from people, catches bots */
+.trap{position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden;}
+
+.submitrow{
+  display:flex;
+  align-items:center;
+  gap:22px;
+  flex-wrap:wrap;
+  margin-top:44px;
+  padding-top:34px;
+  border-top:1px solid var(--rule);
+}
+button.send{
+  font-family:var(--sans);
+  font-size:11.5px;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--white);
+  background:var(--blue-ink);
+  border:1px solid var(--blue-ink);
+  border-radius:999px;
+  padding:16px 44px;
+  cursor:pointer;
+  transition:background .22s ease, color .22s ease, border-color .22s ease;
+}
+button.send:hover{background:transparent;color:var(--blue-ink);border-color:var(--blue);}
+button.send:disabled{opacity:.5;cursor:default;}
+.status{font-size:14.5px;color:var(--body);margin:0;}
+.status.ok{color:#2E6B47;}
+.status.bad{color:#9A3B2E;}
+
+.done{
+  background:var(--panel);
+  padding:44px 40px;
+  display:none;
+}
+.done h2{
+  font-family:var(--display);
+  font-size:32px;
+  font-weight:600;
+  margin:0 0 12px;
+}
+.done p{margin:0 0 20px;color:var(--body);}
+
+@media(max-width:900px){
+  .shell{
+    grid-template-columns:1fr;
+    gap:10px;
+    padding:0 22px;
+  }
+  .rail{position:static;padding:36px 0 8px;}
+  .avatar{width:104px;height:104px;}
+  .rail h1{font-size:27px;}
+  .main{padding:26px 0 70px;}
+  .pagehead{font-size:36px;}
+  .intro{font-size:17px;margin-bottom:34px;}
+}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *{transition:none !important;}
+}
+
+:focus-visible{outline:2px solid var(--deep);outline-offset:3px;}
+</style>
+</head>
+
+<body>
+
+<div class="shell">
+
+  <!-- ============ LEFT RAIL ============ -->
+  <aside class="rail">
+    <div class="avatar" role="img" aria-label="Portrait of Ritwik Singh"></div>
+    <h1><a href="index.html">Ritwik Singh</a></h1>
+    <p class="role">Computational Biology<br>Epigenomics<br>Network Analysis</p>
+
+    <a class="pill" href="tel:+917905085337">Call</a>
+
+    <div class="social">
+      <a href="https://linkedin.com/in/YOUR-HANDLE" target="_blank" rel="noopener" aria-label="LinkedIn profile" title="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a href="https://medium.com/@ritwiksingh.37" target="_blank" rel="noopener" aria-label="Medium profile" title="Medium">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+      </a>
+    </div>
+
+    <a class="backlink" href="index.html">Back to Main</a>
+  </aside>
+
+  <!-- ============ FORM ============ -->
+  <main class="main">
+    <h2 class="pagehead">Reach out</h2>
+    <p class="intro">Research collaborations, graduate positions, or anything about the work on this site. Tell me what you have in mind and I will get back to you.</p>
+
+    <!-- ==========================================================
+         ENDPOINT
+         Replace YOUR-FORM-ENDPOINT below with the URL your form
+         service gives you. Everything else stays as it is.
+         ========================================================== -->
+    <form id="reachForm"
+          action="YOUR-FORM-ENDPOINT"
+          method="POST"
+          enctype="multipart/form-data"
+          novalidate>
+
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your full name" required>
+      </div>
+
+      <div class="field">
+        <label for="contact">Contact
+          <span class="hint">Email address, or a phone number if you prefer</span>
+        </label>
+        <input type="text" id="contact" name="contact" placeholder="you@example.com" required>
+      </div>
+
+      <div class="field">
+        <label for="reason">Reason for reaching out</label>
+        <textarea id="reason" name="reason" placeholder="A few lines on what this is about" required></textarea>
+      </div>
+
+      <div class="field">
+        <label for="attachment">Attachment
+          <span class="hint">Optional. A CV, paper, or brief, up to about 10 MB</span>
+        </label>
+        <div class="filebox">
+          <label class="filebtn" for="attachment">Choose a file</label>
+          <input type="file" id="attachment" name="attachment"
+                 accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg,.csv,.xlsx,.zip">
+          <span class="filename empty" id="fileName">No file selected</span>
+        </div>
+      </div>
+
+      <!-- bot trap, leave empty -->
+      <div class="trap" aria-hidden="true">
+        <label for="company">Company</label>
+        <input type="text" id="company" name="_gotcha" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="submitrow">
+        <button type="submit" class="send" id="sendBtn">Send message</button>
+        <p class="status" id="status"></p>
+      </div>
+    </form>
+
+    <div class="done" id="done">
+      <h2>Message sent</h2>
+      <p>Thanks for getting in touch. I will reply to the contact details you left.</p>
+      <a class="pill" href="index.html">Back to CV</a>
+    </div>
+  </main>
+</div>
+
+<script>
+(function(){
+  var form = document.getElementById('reachForm');
+  var btn = document.getElementById('sendBtn');
+  var status = document.getElementById('status');
+  var done = document.getElementById('done');
+  var fileInput = document.getElementById('attachment');
+  var fileName = document.getElementById('fileName');
+  var MAX_MB = 10;
+
+  /* show the chosen file name */
+  fileInput.addEventListener('change', function(){
+    if(fileInput.files.length){
+      var f = fileInput.files[0];
+      var mb = f.size / (1024 * 1024);
+      if(mb > MAX_MB){
+        fileName.textContent = 'That file is ' + mb.toFixed(1) + ' MB, over the ' + MAX_MB + ' MB limit';
+        fileName.className = 'filename';
+        fileInput.value = '';
+        return;
+      }
+      fileName.textContent = f.name + '  (' + mb.toFixed(1) + ' MB)';
+      fileName.className = 'filename';
+    } else {
+      fileName.textContent = 'No file selected';
+      fileName.className = 'filename empty';
+    }
+  });
+
+  function say(msg, kind){
+    status.textContent = msg;
+    status.className = 'status' + (kind ? ' ' + kind : '');
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    var name = form.name.value.trim();
+    var contact = form.contact.value.trim();
+    var reason = form.reason.value.trim();
+
+    if(!name || !contact || !reason){
+      say('Please fill in your name, contact, and reason.', 'bad');
+      return;
+    }
+
+    /* No endpoint configured yet, fall back to the email client */
+    if(form.action.indexOf('YOUR-FORM-ENDPOINT') !== -1){
+      var body = 'Name: ' + name + '\n'
+               + 'Contact: ' + contact + '\n\n'
+               + 'Reason for reaching out:\n' + reason + '\n\n'
+               + (fileInput.files.length
+                  ? '(Please attach ' + fileInput.files[0].name + ' manually.)'
+                  : '');
+      window.location.href = 'mailto:s29.ritwik@gmail.com'
+        + '?subject=' + encodeURIComponent('Website enquiry from ' + name)
+        + '&body=' + encodeURIComponent(body);
+      say('Opening your email app. Attach the file there if you have one.');
+      return;
+    }
+
+    btn.disabled = true;
+    say('Sending…');
+
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function(res){
+      if(res.ok){
+        form.style.display = 'none';
+        done.style.display = 'block';
+      } else {
+        btn.disabled = false;
+        say('That did not go through. Please email s29.ritwik@gmail.com instead.', 'bad');
+      }
+    })
+    .catch(function(){
+      btn.disabled = false;
+      say('Network problem. Please email s29.ritwik@gmail.com instead.', 'bad');
+    });
+  });
+})();
+</script>
+</body>
+</html>
