@@ -157,18 +157,32 @@ a{color:inherit;}
 .pill.filled:hover{background:transparent;color:var(--blue-ink);border-color:var(--blue);}
 
 /* ============================================================
-   PORTRAIT
-   To show your photo: upload photo.jpg to the repo root, then
-   delete the two comment markers around the <img> tag in the
-   hero below. Nothing else needs changing.
+   AVATAR
+   Circular portrait in the masthead. Shrinks with the header.
+   Change the file name in background-image if yours differs.
    ============================================================ */
-.portrait{
-  display:block;
-  width:100%;
-  aspect-ratio:4 / 5;
-  object-fit:cover;
-  margin:0 0 26px;
+.identity{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
 }
+.avatar{
+  flex:0 0 auto;
+  width:74px;
+  height:74px;
+  border-radius:50%;
+  background-image:url("photo.jpg");
+  background-size:cover;
+  background-position:center 22%;
+  background-repeat:no-repeat;
+  border:1px solid var(--rule);
+  pointer-events:none;
+  user-select:none;
+  -webkit-user-drag:none;
+  transition:width .3s ease, height .3s ease;
+}
+.site.compact .avatar{width:40px;height:40px;}
 
 .statement{
   background:var(--panel);
@@ -448,6 +462,9 @@ footer{
   .track .item{font-size:20px;}
   .track .sep{padding:0 16px;}
   .pill{padding:13px 24px;}
+   .identity{gap:12px;}
+  .avatar{width:52px;height:52px;}
+  .site.compact .avatar{width:32px;height:32px;}
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -479,9 +496,12 @@ footer{
 
 <header class="site" id="siteHeader">
   <div class="wrap masthead">
-    <a class="home" href="#top" aria-label="Back to top">
-      <h1 class="wordmark">Ritwik Singh</h1>
-    </a>
+    <div class="identity">
+      <div class="avatar" role="img" aria-label="Portrait of Ritwik Singh"></div>
+      <a class="home" href="#top" aria-label="Back to top">
+        <h1 class="wordmark">Ritwik Singh</h1>
+      </a>
+    </div>
     <p class="tagline">Computational Biology &nbsp;·&nbsp; Epigenomics &nbsp;·&nbsp; Network Analysis</p>
   </div>
   <nav aria-label="Sections">
@@ -507,10 +527,6 @@ footer{
         <a class="pill" href="tel:+917905085337">Reach Out</a>
       </div>
     </div>
-
-    <div class="fade d2">
-      <img class="portrait" src="photo.jpg" alt="Portrait of Ritwik Singh">
-           end of photo block -->
 
       <div class="statement">
         <p>Computational biologist working on transcriptomic and epigenomic network analysis in clinical <em>Plasmodium falciparum</em> isolates, building separate sense and antisense co-expression networks, mapping differentially methylated regions across disease manifestations, and correlating methylation state against expression to nominate intervention points.</p>
